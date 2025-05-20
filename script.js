@@ -1,5 +1,115 @@
+let invitadosMesaActual = [];
+let ultimaRespuesta = "";
+let personasPendientes = [];
 
-  const mesas = {
+const barajas = 
+{
+  musica: [],
+  cine: [],
+  geografia: [],
+  historia: [],
+  deporte: [],
+  misc: []
+};
+
+function cargarOpcionesMesa() 
+{
+  const select = document.getElementById("mesaSelect");
+  
+  Object.keys(mesas).forEach(nombreMesa => 
+    {
+      const option = document.createElement("option");
+      option.value = nombreMesa;
+      option.textContent = nombreMesa;
+      select.appendChild(option);
+    });
+}
+
+function cargarMesa() 
+{
+  const mesa = document.getElementById("mesaSelect").value;
+  invitadosMesaActual = mesas[mesa] || [];
+  
+  // Actualiza el número máximo automáticamente
+  document.getElementById("maxNumber").value = invitadosMesaActual.length;
+  
+  // Reinicia la baraja
+  personasPendientes = [];
+} 
+
+function siguientePregunta(categoria) 
+{
+  if (barajas[categoria].length === 0) 
+  {
+    barajas[categoria] = [...preguntas[categoria]];
+    shuffleArray(barajas[categoria]);
+  }
+  
+  return barajas[categoria].pop();
+}
+
+function generarNumero() 
+{
+  const mesaSeleccionada = document.getElementById("mesaSelect").value;
+  if (!mesaSeleccionada) 
+  {
+    document.getElementById("numeroOutput").textContent = "⚠️ Por favor, selecciona una mesa primero.";
+    return;
+  }
+  
+  const max = parseInt(document.getElementById("maxNumber").value, 10);
+  if (max < 2) 
+  {
+    document.getElementById("numeroOutput").textContent = "Debe haber al menos 2 personas en la mesa.";
+    return;
+  }
+  
+  if (personasPendientes.length < 2 || personasPendientes.length > max) 
+  {
+    personasPendientes = Array.from({ length: max }, (_, i) => i + 1);
+    shuffleArray(personasPendientes);
+  }
+  
+  const num1 = personasPendientes.pop();
+  const num2 = personasPendientes.pop();
+  
+  const nombre1 = invitadosMesaActual[num1 - 1] || `Nº ${num1}`;
+  const nombre2 = invitadosMesaActual[num2 - 1] || `Nº ${num2}`;
+  
+  document.getElementById("numeroOutput").textContent = `Participan: ${nombre1} y ${nombre2}`;
+
+  if (personasPendientes.length < 2) 
+  {
+    document.getElementById("numeroOutput").textContent += " (Nueva ronda a continuación)";
+  }
+}
+
+function shuffleArray(array) 
+{
+  for (let i = array.length - 1; i > 0; i--) 
+  {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+function preguntaAleatoria() 
+{
+  const cat = document.getElementById("categoria").value;
+  const pregunta = siguientePregunta(cat);
+  document.getElementById("preguntaOutput").textContent = pregunta.q;
+  ultimaRespuesta = pregunta.a;
+  document.getElementById("respuestaOutput").style.display = "none";
+}
+
+function mostrarRespuesta() 
+{
+  const respuestaDiv = document.getElementById("respuestaOutput");
+  respuestaDiv.textContent = `Respuesta: ${ultimaRespuesta}`;
+  respuestaDiv.style.display = "block";
+}
+
+ const mesas = {
     "Principal": [
       "Amalia Lucena",
       "Alberto Burgada",
@@ -39,101 +149,6 @@
       "Encarna de Fernando Caballero"
     ]
   };
-
-
-  function cargarOpcionesMesa() {
-    const select = document.getElementById("mesaSelect");
-    Object.keys(mesas).forEach(nombreMesa => {
-      const option = document.createElement("option");
-      option.value = nombreMesa;
-      option.textContent = nombreMesa;
-      select.appendChild(option);
-    });
-  }
-
-
-  let invitadosMesaActual = [];
-  
-  function cargarMesa() {
-    const mesa = document.getElementById("mesaSelect").value;
-    invitadosMesaActual = mesas[mesa] || [];
-  
-    // Actualiza el número máximo automáticamente
-    document.getElementById("maxNumber").value = invitadosMesaActual.length;
-  
-    // Reinicia la baraja
-    personasPendientes = [];
-  }
-
-    
-      let ultimaRespuesta = "";
-      const barajas = {
-        musica: [],
-        cine: [],
-        geografia: [],
-        historia: [],
-        deporte: [],
-        misc: []
-      };
-
-      function siguientePregunta(categoria) {
-        if (barajas[categoria].length === 0) {
-          barajas[categoria] = [...preguntas[categoria]];
-          shuffleArray(barajas[categoria]);
-        }
-        return barajas[categoria].pop();
-      }
-
-      let personasPendientes = [];
-
-      function generarNumero() {
-        const max = parseInt(document.getElementById("maxNumber").value, 10);
-      
-        if (max < 2) {
-          document.getElementById("numeroOutput").textContent = "Debe haber al menos 2 personas en la mesa.";
-          return;
-        }
-      
-        // Inicializa la baraja si está vacía o contiene personas fuera del rango actual
-        if (personasPendientes.length < 2 || personasPendientes.length > max) {
-          personasPendientes = Array.from({ length: max }, (_, i) => i + 1);
-          shuffleArray(personasPendientes);
-        }
-      
-        const num1 = personasPendientes.pop();
-        const num2 = personasPendientes.pop();
-        
-        const nombre1 = invitadosMesaActual[num1 - 1] || `Nº ${num1}`;
-const nombre2 = invitadosMesaActual[num2 - 1] || `Nº ${num2}`;
-      
-        document.getElementById("numeroOutput").textContent = `Participan: ${nombre1} y ${nombre2}`;
-      
-        if (personasPendientes.length < 2) {
-          document.getElementById("numeroOutput").textContent += " (Nueva ronda a continuación)";
-        }
-      }
-      
-      function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-      }
-
-      function preguntaAleatoria() {
-        const cat = document.getElementById("categoria").value;
-        const pregunta = siguientePregunta(cat);
-        document.getElementById("preguntaOutput").textContent = pregunta.q;
-        ultimaRespuesta = pregunta.a;
-        document.getElementById("respuestaOutput").style.display = "none";
-      }
-
-      function mostrarRespuesta() {
-        const respuestaDiv = document.getElementById("respuestaOutput");
-        respuestaDiv.textContent = `Respuesta: ${ultimaRespuesta}`;
-        respuestaDiv.style.display = "block";
-      }
-
       
       const preguntas = {
         musica: [{
@@ -842,7 +857,8 @@ const nombre2 = invitadosMesaActual[num2 - 1] || `Nº ${num2}`;
         }, ]
       };
       
-          window.onload = function () {
+
+window.onload = function () 
+{
   cargarOpcionesMesa();
-};
-      
+};  
