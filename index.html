@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boda de Amalia y Alberto</title>
+    <title>Boda de Amalia y Alberto 28/06/2025</title>
     <style>
       body {
         font-family: sans-serif;
@@ -93,33 +93,34 @@
 
       function generarNumero() {
         const max = parseInt(document.getElementById("maxNumber").value, 10);
+      
         if (max < 2) {
           document.getElementById("numeroOutput").textContent = "Debe haber al menos 2 personas en la mesa.";
           return;
         }
       
-        // Rellenar la lista si está vacía o no tiene suficientes para elegir 2
-        if (personasPendientes.length < 2) {
+        // Inicializa la baraja si está vacía o contiene personas fuera del rango actual
+        if (personasPendientes.length < 2 || personasPendientes.length > max) {
           personasPendientes = Array.from({ length: max }, (_, i) => i + 1);
           shuffleArray(personasPendientes);
         }
       
-        // Seleccionar dos participantes diferentes y eliminarlos de la lista
         const num1 = personasPendientes.pop();
         const num2 = personasPendientes.pop();
       
         document.getElementById("numeroOutput").textContent = `Participan: ${num1} y ${num2}`;
+      
+        if (personasPendientes.length < 2) {
+          document.getElementById("numeroOutput").textContent += " (Nueva ronda a continuación)";
+        }
       }
       
-      // Barajar array (Fisher-Yates)
       function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [array[i], array[j]] = [array[j], array[i]];
         }
       }
-
-
 
       function preguntaAleatoria() {
         const cat = document.getElementById("categoria").value;
