@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Juego de Mesa - Boda</title>
+  <title>Boda de Amalia y Alberto</title>
   <style>
     body {
       font-family: sans-serif;
@@ -35,11 +35,14 @@
       padding: 0.3em;
       margin: 0.5em;
     }
+    #respuestaOutput {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
-  <h1>🎉 Juego de Mesa de Boda 🎲</h1>
+  <h1>🎉 Boda de Amalia y Alberto 🎲</h1>
 
   <label for="maxNumber">Nº de personas en la mesa:</label>
   <input type="number" id="maxNumber" min="1" value="10" style="width: 60px;" />
@@ -63,10 +66,13 @@
   <div>
     <button onclick="preguntaAleatoria()">Mostrar pregunta</button>
     <div class="output" id="preguntaOutput"></div>
+    <button onclick="mostrarRespuesta()">Mostrar respuesta</button>
     <div class="output" id="respuestaOutput" style="color: #555; font-weight: normal;"></div>
   </div>
 
   <script>
+    let ultimaRespuesta = "";
+
     const preguntas = {
       musica: [
         { q: "¿Quién canta la canción 'Bohemian Rhapsody'?", a: "Queen" },
@@ -78,8 +84,7 @@
         { q: "¿En qué año se celebró el primer festival de Woodstock?", a: "1969" },
         { q: "¿Qué grupo español canta 'La Flaca'?", a: "Jarabe de Palo" },
         { q: "¿Quién es el autor de la canción 'Imagine'?", a: "John Lennon" },
-        { q: "¿Qué cantante lanzó el álbum '1989'?", a: "Taylor Swift" },
-        // Añadir 20 más...
+        { q: "¿Qué cantante lanzó el álbum '1989'?", a: "Taylor Swift" }
       ],
       cine: [
         { q: "¿Quién dirigió 'Pulp Fiction'?", a: "Quentin Tarantino" },
@@ -91,8 +96,7 @@
         { q: "¿Cuál es la película más taquillera de la historia?", a: "Avatar (2009)" },
         { q: "¿Qué actriz protagoniza 'La La Land'?", a: "Emma Stone" },
         { q: "¿Quién es el villano en 'Avengers: Endgame'?", a: "Thanos" },
-        { q: "¿Qué película dice la frase 'Yo soy tu padre'?", a: "Star Wars: Episodio V" },
-        // Añadir 20 más...
+        { q: "¿Qué película dice la frase 'Yo soy tu padre'?", a: "Star Wars: Episodio V" }
       ],
       geografia: [
         { q: "¿Cuál es el río más largo del mundo?", a: "Amazonas" },
@@ -104,8 +108,7 @@
         { q: "¿En qué continente está Egipto?", a: "África" },
         { q: "¿Qué océano está entre África y Australia?", a: "Océano Índico" },
         { q: "¿Qué país tiene más husos horarios?", a: "Francia" },
-        { q: "¿Qué desierto es el más grande del mundo?", a: "Antártida" },
-        // Añadir 20 más...
+        { q: "¿Qué desierto es el más grande del mundo?", a: "Antártida" }
       ],
       historia: [
         { q: "¿Quién descubrió América?", a: "Cristóbal Colón" },
@@ -117,8 +120,7 @@
         { q: "¿Qué imperio era liderado por Julio César?", a: "Imperio Romano" },
         { q: "¿Quién escribió 'El Príncipe'?", a: "Maquiavelo" },
         { q: "¿Dónde nació Napoleón?", a: "Córcega" },
-        { q: "¿Qué tratado puso fin a la Primera Guerra Mundial?", a: "Tratado de Versalles" },
-        // Añadir 20 más...
+        { q: "¿Qué tratado puso fin a la Primera Guerra Mundial?", a: "Tratado de Versalles" }
       ],
       misc: [
         { q: "¿Cuántos colores tiene el arcoíris?", a: "Siete" },
@@ -130,8 +132,7 @@
         { q: "¿Cuántos lados tiene un octágono?", a: "Ocho" },
         { q: "¿Qué lengua se habla en Brasil?", a: "Portugués" },
         { q: "¿Qué parte del cuerpo produce insulina?", a: "Páncreas" },
-        { q: "¿Cuál es el símbolo químico del agua?", a: "H2O" },
-        // Añadir 20 más...
+        { q: "¿Cuál es el símbolo químico del agua?", a: "H2O" }
       ]
     };
 
@@ -147,7 +148,14 @@
       const lista = preguntas[cat];
       const index = Math.floor(Math.random() * lista.length);
       document.getElementById("preguntaOutput").textContent = lista[index].q;
-      document.getElementById("respuestaOutput").textContent = `Respuesta: ${lista[index].a}`;
+      ultimaRespuesta = lista[index].a;
+      document.getElementById("respuestaOutput").style.display = "none";
+    }
+
+    function mostrarRespuesta() {
+      const respuestaDiv = document.getElementById("respuestaOutput");
+      respuestaDiv.textContent = `Respuesta: ${ultimaRespuesta}`;
+      respuestaDiv.style.display = "block";
     }
   </script>
 </body>
