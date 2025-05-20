@@ -81,13 +81,6 @@
         misc: []
       };
 
-      function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-      }
-
       function siguientePregunta(categoria) {
         if (barajas[categoria].length === 0) {
           barajas[categoria] = [...preguntas[categoria]];
@@ -95,6 +88,54 @@
         }
         return barajas[categoria].pop();
       }
+
+      let personasPendientes = [];
+
+      function generarNumero() {
+        const max = parseInt(document.getElementById("maxNumber").value, 10);
+        if (max < 2) {
+          document.getElementById("numeroOutput").textContent = "Debe haber al menos 2 personas en la mesa.";
+          return;
+        }
+      
+        // Rellenar la lista si está vacía o no tiene suficientes para elegir 2
+        if (personasPendientes.length < 2) {
+          personasPendientes = Array.from({ length: max }, (_, i) => i + 1);
+          shuffleArray(personasPendientes);
+        }
+      
+        // Seleccionar dos participantes diferentes y eliminarlos de la lista
+        const num1 = personasPendientes.pop();
+        const num2 = personasPendientes.pop();
+      
+        document.getElementById("numeroOutput").textContent = `Participan: ${num1} y ${num2}`;
+      }
+      
+      // Barajar array (Fisher-Yates)
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+
+
+
+      function preguntaAleatoria() {
+        const cat = document.getElementById("categoria").value;
+        const pregunta = siguientePregunta(cat);
+        document.getElementById("preguntaOutput").textContent = pregunta.q;
+        ultimaRespuesta = pregunta.a;
+        document.getElementById("respuestaOutput").style.display = "none";
+      }
+
+      function mostrarRespuesta() {
+        const respuestaDiv = document.getElementById("respuestaOutput");
+        respuestaDiv.textContent = `Respuesta: ${ultimaRespuesta}`;
+        respuestaDiv.style.display = "block";
+      }
+
+      
       const preguntas = {
         musica: [{
           q: "¿Quién canta la canción 'Bohemian Rhapsody'?",
@@ -801,37 +842,7 @@
           a: "Ballena azul"
         }, ]
       };
-
-      function generarNumero() {
-        const max = parseInt(document.getElementById("maxNumber").value, 10);
-        if (max < 2) {
-          document.getElementById("numeroOutput").textContent = "Debe haber al menos 2 personas en la mesa.";
-          return;
-        }
       
-        const num1 = Math.floor(Math.random() * max) + 1;
-        let num2;
-        do {
-          num2 = Math.floor(Math.random() * max) + 1;
-        } while (num2 === num1);
-      
-        document.getElementById("numeroOutput").textContent = `Participan: ${num1} y ${num2}`;
-      }
-
-
-      function preguntaAleatoria() {
-        const cat = document.getElementById("categoria").value;
-        const pregunta = siguientePregunta(cat);
-        document.getElementById("preguntaOutput").textContent = pregunta.q;
-        ultimaRespuesta = pregunta.a;
-        document.getElementById("respuestaOutput").style.display = "none";
-      }
-
-      function mostrarRespuesta() {
-        const respuestaDiv = document.getElementById("respuestaOutput");
-        respuestaDiv.textContent = `Respuesta: ${ultimaRespuesta}`;
-        respuestaDiv.style.display = "block";
-      }
     </script>
   </body>
 </html>
