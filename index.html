@@ -53,15 +53,15 @@
   </head>
   <body>
     <h1>🎉 Quizz: Boda de Amalia y Alberto 🎲</h1>
-    <h2> 28 de Junio de 2025 </h2>
+    <h2>📅 28 de Junio de 2025 </h2>
     <label for="maxNumber">Selecciona el nº de personas en la mesa:</label>
     <input type="number" id="maxNumber" min="1" value="10" style="width: 60px;" />
     <div>
-      <button onclick="generarNumero()">Generar número</button>
+      <button onclick="generarNumero()">🔫 Generar duelo</button>
       <div class="output" id="numeroOutput"></div>
     </div>
     <hr />
-    <label for="categoria">Selecciona categoría:</label>
+    <label for="categoria">📚 Selecciona categoría:</label>
     <select id="categoria">
       <option value="musica">Música</option>
       <option value="cine">Cine</option>
@@ -71,9 +71,9 @@
       <option value="misc">Miscelánea</option>
     </select>
     <div>
-      <button onclick="preguntaAleatoria()">Mostrar pregunta</button>
+      <button onclick="preguntaAleatoria()">❓ Nueva pregunta</button>
       <div class="output" id="preguntaOutput"></div>
-      <button onclick="mostrarRespuesta()">Mostrar respuesta</button>
+      <button onclick="mostrarRespuesta()">✔️ Mostrar respuesta</button>
       <div class="output" id="respuestaOutput" style="color: #555; font-weight: normal;"></div>
     </div>
     <script>
