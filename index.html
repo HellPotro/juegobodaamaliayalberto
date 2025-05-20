@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juego de Mesa - Boda</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2em;
+      background: #fff8f0;
+    }
+    h1 {
+      margin-bottom: 0.5em;
+      font-family: 'Georgia', serif;
+    }
+    button {
+      padding: 1em 2em;
+      margin: 1em;
+      font-size: 1.2em;
+      cursor: pointer;
+      background: #f48fb1;
+      border: none;
+      border-radius: 8px;
+      color: white;
+    }
+    .output {
+      font-size: 1.3em;
+      margin-top: 1em;
+      font-weight: bold;
+    }
+    select, input[type=number] {
+      font-size: 1em;
+      padding: 0.3em;
+      margin: 0.5em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Juego de Mesa de Boda 🎲</h1>
+
+  <label for="maxNumber">Nº de personas en la mesa:</label>
+  <input type="number" id="maxNumber" min="1" value="10" style="width: 60px;" />
+
+  <div>
+    <button onclick="generarNumero()">Generar número</button>
+    <div class="output" id="numeroOutput"></div>
+  </div>
+
+  <hr/>
+
+  <label for="categoria">Selecciona categoría:</label>
+  <select id="categoria">
+    <option value="musica">Música</option>
+    <option value="cine">Cine</option>
+    <option value="geografia">Geografía</option>
+    <option value="historia">Historia</option>
+    <option value="misc">Miscelánea</option>
+  </select>
+
+  <div>
+    <button onclick="preguntaAleatoria()">Mostrar pregunta</button>
+    <div class="output" id="preguntaOutput"></div>
+    <div class="output" id="respuestaOutput" style="color: #555; font-weight: normal;"></div>
+  </div>
+
+  <script>
+    const preguntas = {
+      musica: [
+        { q: "¿Quién canta la canción 'Bohemian Rhapsody'?", a: "Queen" },
+        { q: "¿Qué cantante es conocido como 'El Rey del Pop'?", a: "Michael Jackson" },
+        { q: "¿Qué instrumento toca Slash?", a: "Guitarra" },
+        { q: "¿De qué país es la banda ABBA?", a: "Suecia" },
+        { q: "¿Cuál es el nombre real de Lady Gaga?", a: "Stefani Joanne Angelina Germanotta" },
+        { q: "¿Qué banda compuso 'Smells Like Teen Spirit'?", a: "Nirvana" },
+        { q: "¿En qué año se celebró el primer festival de Woodstock?", a: "1969" },
+        { q: "¿Qué grupo español canta 'La Flaca'?", a: "Jarabe de Palo" },
+        { q: "¿Quién es el autor de la canción 'Imagine'?", a: "John Lennon" },
+        { q: "¿Qué cantante lanzó el álbum '1989'?", a: "Taylor Swift" },
+        // Añadir 20 más...
+      ],
+      cine: [
+        { q: "¿Quién dirigió 'Pulp Fiction'?", a: "Quentin Tarantino" },
+        { q: "¿Qué actor interpretó a Forrest Gump?", a: "Tom Hanks" },
+        { q: "¿En qué año se estrenó 'Titanic'?", a: "1997" },
+        { q: "¿Quién interpretó a Batman en 'El Caballero Oscuro'?", a: "Christian Bale" },
+        { q: "¿Qué película ganó el Oscar a mejor película en 2020?", a: "Parásitos" },
+        { q: "¿Cómo se llama el hobbit protagonista de 'El Señor de los Anillos'?", a: "Frodo" },
+        { q: "¿Cuál es la película más taquillera de la historia?", a: "Avatar (2009)" },
+        { q: "¿Qué actriz protagoniza 'La La Land'?", a: "Emma Stone" },
+        { q: "¿Quién es el villano en 'Avengers: Endgame'?", a: "Thanos" },
+        { q: "¿Qué película dice la frase 'Yo soy tu padre'?", a: "Star Wars: Episodio V" },
+        // Añadir 20 más...
+      ],
+      geografia: [
+        { q: "¿Cuál es el río más largo del mundo?", a: "Amazonas" },
+        { q: "¿Cuál es la capital de Australia?", a: "Canberra" },
+        { q: "¿Qué país tiene forma de bota?", a: "Italia" },
+        { q: "¿Dónde se encuentra el monte Everest?", a: "Nepal" },
+        { q: "¿Qué país tiene más islas?", a: "Suecia" },
+        { q: "¿Cuál es la ciudad más poblada del mundo?", a: "Tokio" },
+        { q: "¿En qué continente está Egipto?", a: "África" },
+        { q: "¿Qué océano está entre África y Australia?", a: "Océano Índico" },
+        { q: "¿Qué país tiene más husos horarios?", a: "Francia" },
+        { q: "¿Qué desierto es el más grande del mundo?", a: "Antártida" },
+        // Añadir 20 más...
+      ],
+      historia: [
+        { q: "¿Quién descubrió América?", a: "Cristóbal Colón" },
+        { q: "¿En qué año comenzó la Segunda Guerra Mundial?", a: "1939" },
+        { q: "¿Qué civilización construyó las pirámides?", a: "Egipcia" },
+        { q: "¿Quién fue el primer presidente de EE.UU.?", a: "George Washington" },
+        { q: "¿Qué muro cayó en 1989?", a: "El Muro de Berlín" },
+        { q: "¿En qué siglo fue la Revolución Francesa?", a: "Siglo XVIII" },
+        { q: "¿Qué imperio era liderado por Julio César?", a: "Imperio Romano" },
+        { q: "¿Quién escribió 'El Príncipe'?", a: "Maquiavelo" },
+        { q: "¿Dónde nació Napoleón?", a: "Córcega" },
+        { q: "¿Qué tratado puso fin a la Primera Guerra Mundial?", a: "Tratado de Versalles" },
+        // Añadir 20 más...
+      ],
+      misc: [
+        { q: "¿Cuántos colores tiene el arcoíris?", a: "Siete" },
+        { q: "¿Cuál es el animal más rápido del mundo?", a: "Guepardo" },
+        { q: "¿Cuál es el planeta más grande del sistema solar?", a: "Júpiter" },
+        { q: "¿Qué instrumento mide los terremotos?", a: "Sismógrafo" },
+        { q: "¿Cuál es el elemento químico del oro?", a: "Au" },
+        { q: "¿En qué deporte se usa un birdie?", a: "Bádminton" },
+        { q: "¿Cuántos lados tiene un octágono?", a: "Ocho" },
+        { q: "¿Qué lengua se habla en Brasil?", a: "Portugués" },
+        { q: "¿Qué parte del cuerpo produce insulina?", a: "Páncreas" },
+        { q: "¿Cuál es el símbolo químico del agua?", a: "H2O" },
+        // Añadir 20 más...
+      ]
+    };
+
+    function generarNumero() {
+      const max = parseInt(document.getElementById("maxNumber").value, 10);
+      const num1 = Math.floor(Math.random() * max) + 1;
+      const num2 = Math.floor(Math.random() * max) + 1;
+      document.getElementById("numeroOutput").textContent = `Participan: ${num1} y ${num2}`;
+    }
+
+    function preguntaAleatoria() {
+      const cat = document.getElementById("categoria").value;
+      const lista = preguntas[cat];
+      const index = Math.floor(Math.random() * lista.length);
+      document.getElementById("preguntaOutput").textContent = lista[index].q;
+      document.getElementById("respuestaOutput").textContent = `Respuesta: ${lista[index].a}`;
+    }
+  </script>
+</body>
+</html>
