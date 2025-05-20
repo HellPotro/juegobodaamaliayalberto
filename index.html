@@ -804,10 +804,20 @@
 
       function generarNumero() {
         const max = parseInt(document.getElementById("maxNumber").value, 10);
+        if (max < 2) {
+          document.getElementById("numeroOutput").textContent = "Debe haber al menos 2 personas en la mesa.";
+          return;
+        }
+      
         const num1 = Math.floor(Math.random() * max) + 1;
-        const num2 = Math.floor(Math.random() * max) + 1;
+        let num2;
+        do {
+          num2 = Math.floor(Math.random() * max) + 1;
+        } while (num2 === num1);
+      
         document.getElementById("numeroOutput").textContent = `Participan: ${num1} y ${num2}`;
       }
+
 
       function preguntaAleatoria() {
         const cat = document.getElementById("categoria").value;
