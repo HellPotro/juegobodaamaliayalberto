@@ -54,8 +54,17 @@
   <body>
     <h1>🎉 Quizz: Boda de Amalia y Alberto 🎲</h1>
     <h2>📅 28 de Junio de 2025 </h2>
-    <label for="maxNumber">Selecciona el nº de personas en la mesa:</label>
-    <input type="number" id="maxNumber" min="1" value="10" style="width: 60px;" />
+    
+    <label for="mesaSelect">Selecciona tu mesa:</label>
+<select id="mesaSelect" onchange="cargarMesa()">
+  <option value="">-- Elige una mesa --</option>
+</select>
+
+<input type="hidden" id="maxNumber" />
+
+
+
+
     <div>
       <button onclick="generarNumero()">🔫 Generar duelo</button>
       <div class="output" id="numeroOutput"></div>
@@ -76,7 +85,75 @@
       <button onclick="mostrarRespuesta()">✔️ Mostrar respuesta</button>
       <div class="output" id="respuestaOutput" style="color: #555; font-weight: normal;"></div>
     </div>
-    <script>
+    <script>  
+   
+  const mesas = {
+    "Principal": [
+      "Amalia Lucena",
+      "Alberto Burgada",
+      "Jael Burgada Ruiz",
+      "Raúl Gómez de la Riva",
+      "Pedro Burgada Palleiro",
+      "Jael Ruiz Diego",
+      "Pedro Burgada Ruiz",
+      "Marina Llama",
+      "Amalia María López Calvo",
+      "Pedro Antonio Lucena González",
+      "Ana Álvarez Aldomá",
+      "Antonio Lucena López"
+    ],
+    "ACEFAM": [
+      "Sylvia De Miguel Puebla",
+      "Ricardo Torres Álvarez",
+      "Isaac Piñuela Rodríguez",
+      "Marian Ares Alonso",
+      "Marta Beltrán Amago",
+      "Álvaro Arjona Aguirre",
+      "Miguel Angel Martinez Burgada",
+      "Marta Ausucua García",
+      "Javier Palomera del Barrio",
+      "Álvaro Herrero"
+    ],
+    "FANTASTICAS": [
+      "Paloma Fernández",
+      "Juan Martínez Palenque",
+      "Yolanda López Ramos",
+      "Alfredo Álvarez Ruiz",
+      "Avelina López Ramos",
+      "Florentino Abio",
+      "Ana Rosa Aldomá Puigdomenech",
+      "José Ramón Álvarez Ribalaygua",
+      "Martín Juan Navarro García",
+      "Encarna de Fernando Caballero"
+    ]
+  };
+
+
+  function cargarOpcionesMesa() {
+    const select = document.getElementById("mesaSelect");
+    Object.keys(mesas).forEach(nombreMesa => {
+      const option = document.createElement("option");
+      option.value = nombreMesa;
+      option.textContent = nombreMesa;
+      select.appendChild(option);
+    });
+  }
+
+
+  let invitadosMesaActual = [];
+  
+  function cargarMesa() {
+    const mesa = document.getElementById("mesaSelect").value;
+    invitadosMesaActual = mesas[mesa] || [];
+  
+    // Actualiza el número máximo automáticamente
+    document.getElementById("maxNumber").value = invitadosMesaActual.length;
+  
+    // Reinicia la baraja
+    personasPendientes = [];
+  }
+
+    
       let ultimaRespuesta = "";
       const barajas = {
         musica: [],
@@ -113,8 +190,11 @@
       
         const num1 = personasPendientes.pop();
         const num2 = personasPendientes.pop();
+        
+        const nombre1 = invitadosMesaActual[num1 - 1] || `Nº ${num1}`;
+const nombre2 = invitadosMesaActual[num2 - 1] || `Nº ${num2}`;
       
-        document.getElementById("numeroOutput").textContent = `Participan: ${num1} y ${num2}`;
+        document.getElementById("numeroOutput").textContent = `Participan: ${nombre1} y ${nombre2}`;
       
         if (personasPendientes.length < 2) {
           document.getElementById("numeroOutput").textContent += " (Nueva ronda a continuación)";
@@ -849,6 +929,10 @@
           a: "Ballena azul"
         }, ]
       };
+      
+          window.onload = function () {
+  cargarOpcionesMesa();
+};
       
     </script>
   </body>
