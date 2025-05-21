@@ -111,42 +111,66 @@ function mostrarRespuesta()
 
  const mesas = {
     "Principal": [
-      "Amalia Lucena",
-      "Alberto Burgada",
-      "Jael Burgada Ruiz",
-      "Raúl Gómez de la Riva",
-      "Pedro Burgada Palleiro",
-      "Jael Ruiz Diego",
-      "Pedro Burgada Ruiz",
-      "Marina Llama",
-      "Amalia María López Calvo",
-      "Pedro Antonio Lucena González",
-      "Ana Álvarez Aldomá",
-      "Antonio Lucena López"
+"Amalita",
+"Alberto",
+"Jaelita",
+"Raúl",
+"Pedro Padre",
+"Jael",
+"Pedro",
+"Marina",
+"Amalia",
+"Pedro",
+"Ana",
+"Antonio"
     ],
     "ACEFAM": [
-      "Sylvia De Miguel Puebla",
-      "Ricardo Torres Álvarez",
-      "Isaac Piñuela Rodríguez",
-      "Marian Ares Alonso",
-      "Marta Beltrán Amago",
-      "Álvaro Arjona Aguirre",
-      "Miguel Angel Martinez Burgada",
-      "Marta Ausucua García",
-      "Javier Palomera del Barrio",
-      "Álvaro Herrero"
+"Sylvia",
+"Ricky",
+"Isaac",
+"Marian",
+"Marta",
+"Álvaro",
+"Miki",
+"Marta",
+"Palomera",
+"Álvaro Herrero"
     ],
-    "FANTASTICAS": [
-      "Paloma Fernández",
-      "Juan Martínez Palenque",
-      "Yolanda López Ramos",
-      "Alfredo Álvarez Ruiz",
-      "Avelina López Ramos",
-      "Florentino Abio",
-      "Ana Rosa Aldomá Puigdomenech",
-      "José Ramón Álvarez Ribalaygua",
-      "Martín Juan Navarro García",
-      "Encarna de Fernando Caballero"
+    "Fantásticas": [
+"Paloma",
+"Juan",
+"Yoly",
+"Alfredo",
+"Beli",
+"Floren",
+"Ana Rosa",
+"Jose Ramón",
+"Maribel",
+"Miguel Ángel"
+    ],
+   "Los Escolapios": [
+"Gon",
+"Carmen",
+"Manel",
+"Laura",
+"Piris",
+"Irene",
+"Jaime",
+"Chis",
+"López",
+"Miriam"
+    ],
+   "La Lupe": [
+"Lore",
+"Javi",
+"Dimas",
+"Arteye",
+"Iglesias",
+"Jacobo",
+"Mikel",
+"Rosales",
+"More",
+"Marina"
     ]
   };
       
