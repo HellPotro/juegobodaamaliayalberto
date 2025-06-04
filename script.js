@@ -140,7 +140,7 @@ function mostrarRespuesta()
   "David",
   "Belén",
   "Marta",
-  "Álvaro" ],
+  "Álvaro Arjona" ],
 "Los Magníficos": [
   "Paloma",
   "Juan",
