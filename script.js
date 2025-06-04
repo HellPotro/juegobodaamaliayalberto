@@ -27,6 +27,11 @@ function cargarOpcionesMesa()
     option.textContent = nombreMesa;
     select.appendChild(option);
   });
+
+  if (nombresOrdenados.length > 0) {
+    select.value = nombresOrdenados[0];
+    cargarMesa(); // <- Carga los datos de esa mesa por defecto
+  }
 }
 
 
