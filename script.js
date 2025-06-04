@@ -83,7 +83,7 @@ function generarNumero()
   const nombre1 = invitadosMesaActual[num1 - 1] || `Nº ${num1}`;
   const nombre2 = invitadosMesaActual[num2 - 1] || `Nº ${num2}`;
   
-  document.getElementById("numeroOutput").textContent = `Participan: ${nombre1} y ${nombre2}`;
+  document.getElementById("numeroOutput").textContent = `Participan: ${nombre1} & ${nombre2}`;
 
   if (personasPendientes.length < 2) 
   {
