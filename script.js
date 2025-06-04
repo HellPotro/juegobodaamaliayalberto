@@ -19,9 +19,7 @@ function cargarOpcionesMesa()
   // Vaciar el select por si ya tenía opciones
   select.innerHTML = "";
 
-  // Ordenar las claves alfabéticamente
   const nombresOrdenados = Object.keys(mesas).sort();
-
   nombresOrdenados.forEach(nombreMesa => 
   {
     const option = document.createElement("option");
@@ -83,7 +81,7 @@ function generarNumero()
   const nombre1 = invitadosMesaActual[num1 - 1] || `Nº ${num1}`;
   const nombre2 = invitadosMesaActual[num2 - 1] || `Nº ${num2}`;
   
-  document.getElementById("numeroOutput").textContent = `DUELO: ${nombre1} Vs. ${nombre2}`;
+  document.getElementById("numeroOutput").textContent = `${nombre1} Vs. ${nombre2}`;
 
   if (personasPendientes.length < 2) 
   {
