@@ -19,6 +19,13 @@ function cargarOpcionesMesa()
   // Vaciar el select por si ya tenía opciones
   select.innerHTML = "";
 
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "Seleccionar mesa";
+  defaultOption.disabled = true;
+  defaultOption.selected = true;
+  select.appendChild(defaultOption);
+
   const nombresOrdenados = Object.keys(mesas).sort();
   nombresOrdenados.forEach(nombreMesa => 
   {
@@ -27,11 +34,6 @@ function cargarOpcionesMesa()
     option.textContent = nombreMesa;
     select.appendChild(option);
   });
-
-  if (nombresOrdenados.length > 0) {
-    select.value = nombresOrdenados[0];
-    cargarMesa(); // <- Carga los datos de esa mesa por defecto
-  }
 }
 
 
