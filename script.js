@@ -15,15 +15,22 @@ const barajas =
 function cargarOpcionesMesa() 
 {
   const select = document.getElementById("mesaSelect");
-  
-  Object.keys(mesas).forEach(nombreMesa => 
-    {
-      const option = document.createElement("option");
-      option.value = nombreMesa;
-      option.textContent = nombreMesa;
-      select.appendChild(option);
-    });
+
+  // Vaciar el select por si ya tenía opciones
+  select.innerHTML = "";
+
+  // Ordenar las claves alfabéticamente
+  const nombresOrdenados = Object.keys(mesas).sort();
+
+  nombresOrdenados.forEach(nombreMesa => 
+  {
+    const option = document.createElement("option");
+    option.value = nombreMesa;
+    option.textContent = nombreMesa;
+    select.appendChild(option);
+  });
 }
+
 
 function cargarMesa() 
 {
