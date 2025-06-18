@@ -185,7 +185,6 @@ function mostrarRespuesta()
   "Esther",
   "Mancas",
   "Montse",
-  "María",
   "Vidal",
   "Jonny" ],
 "MSN Messenger": [
@@ -306,7 +305,7 @@ function mostrarRespuesta()
   "Pablo",
   "Blanca",
   "Nieves" ],
-"Protocolo Secreto": [
+"Aula Magna": [
   "Choche",
   "Marichu",
   "Pilu",
