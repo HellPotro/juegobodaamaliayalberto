@@ -265,7 +265,6 @@ function mostrarRespuesta()
   "Felix" ],
 "Conchitas & Conchitos": [
   "Marta Sup",
-  "Javier Sup",
   "Luis",
   "Cris",
   "Mercedes",
