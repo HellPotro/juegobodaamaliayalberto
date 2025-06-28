@@ -313,9 +313,7 @@ function mostrarRespuesta()
   "Gonzalo",
   "Inma",
   "Jorge",
-  "Luchy",
-  "Isa",
-  "Ignacio" ],
+  "Luchy" ],
 "La Alegría de la Huerta": [
   "Bruno",
   "María",
