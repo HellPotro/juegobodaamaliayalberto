@@ -332,8 +332,6 @@ function mostrarRespuesta()
   "Villalba",
   "Julio",
   "Carlota",
-  "Josito",
-  "Paloma",
   "Azahara",
   "Gerard",
   "Joni",
