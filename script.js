@@ -9,7 +9,8 @@ const barajas =
   geografia: [],
   historia: [],
   deporte: [],
-  misc: []
+  misc: [],
+  novios: []
 };
 
 function cargarOpcionesMesa() 
@@ -1120,7 +1121,26 @@ function mostrarRespuesta()
         }, {
           q: "¿Qué es más grande: una ballena azul o un autobús?",
           a: "Ballena azul"
-        }, ]
+        }, ],
+        novios: [{
+          q: "¿Quién cocina en casa'?",
+          a: "Alberto"
+        }, {
+          q: "¿Quien es mayor de los dos'?",
+          a: "Amalia"
+        }, {
+          q: "¿Quien ha organizado la boda?",
+          a: "Alberto.... No, Amalia"
+        }, {
+          q: "¿Donde se conocieron?",
+          a: "En Santander"
+        }, {
+          q: "¿Quién de los dos toca la guitarra?",
+          a: "Alberto"
+        },{
+          q: "¿Quién hizo Erasmus en Innsbruck'?",
+          a: "Amalia"
+        }]
       };
       
 
