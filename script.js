@@ -255,7 +255,6 @@ function mostrarRespuesta()
 "Young Wild and Free": [
   "Jon",
   "Delia",
-  "Héctor",
   "Gerard",
   "Cristina",
   "Migue",
